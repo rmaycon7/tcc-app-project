@@ -1,5 +1,10 @@
 const app = require('./app/app')
 
-app.listen(8080, () => {
-	console.log('running ...')
+const PORT = process.env.PORT || 8080
+
+app.listen(PORT, error => {
+	if (error) {
+		console.log({ error: error })
+	}
+	console.log(`Running in http://localhost:${PORT}`)
 })
