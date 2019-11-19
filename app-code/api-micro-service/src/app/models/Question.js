@@ -27,6 +27,11 @@ const QuestionSchema = new mongoose.Schema(
 			type: Array,
 			default: [],
 			es_indexed: true
+		},
+		previous_version:{
+			type: mongoose.SchemaTypes.ObjectId,
+			ref: 'Question',
+			default: null
 		}
 	},
 	{ timestamps: true }
