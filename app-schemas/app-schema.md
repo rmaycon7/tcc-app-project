@@ -1,4 +1,5 @@
-Requisitos para a aplicação  
+## Requisitos para a aplicação
+
 todas as informacoes sao publicas, exceto senhas dos usuários, para que seja possivel o compartilhamento de informacoes de maniea mais simples.
 
 - auth

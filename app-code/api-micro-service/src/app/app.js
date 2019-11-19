@@ -34,6 +34,14 @@ const Answer = require('./models/Answer')
 // 	}
 // })
 app.get('*', async (req, res, next) => {
+	User.esSearch({
+		query_string: {
+			query: req.query.query
+		}
+	}).then(function(results) {
+		// results here
+		res.json(results)
+	})
 	// User.search(
 	// 	{
 	// 		query_string: {
@@ -43,15 +51,14 @@ app.get('*', async (req, res, next) => {
 	// 	function(err, results) {
 	// 		// results here
 	// 		console.log(results)
-
 	// 		res.json(results)
 	// 	}
 	// )
-	User.find(async (error, data) => {
-		const data1 = await Answer.find()
-		const data2 = await Question.find()
-		res.json({ data, data1, data2 })
-	})
+	// User.find(async (error, data) => {
+	// 	const data1 = await Answer.find()
+	// 	const data2 = await Question.find()
+	// 	res.json({ data, data1, data2 })
+	// })
 	// res.json({
 	//   msg: "ok"
 	// })

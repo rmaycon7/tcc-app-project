@@ -14,12 +14,16 @@
     "compress": "^0.99.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "elasticsearch": "^16.5.0",
     "eslint": "^6.6.0",
     "eslint-plugin-prettier": "^3.1.1",
     "express": "^4.17.1",
     "helmet": "^3.21.2",
     "mongoosastic": "^4.5.1",
     "mongoose": "^5.7.7",
+    "mongoose-bcrypt": "^1.6.0",
+    "mongoose-elasticsearch-xp": "^5.8.0",
+    "mongoose-version": "^1.1.0",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
     "nodemon": "^1.19.4",
@@ -30,5 +34,8 @@
   "scripts": {
     "start": "node ./src/server.js",
     "dev": "nodemon -w ./src ./src/server.js"
+  },
+  "devDependencies": {
+    "socket.io": "^2.3.0"
   }
 }

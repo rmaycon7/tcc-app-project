@@ -1,5 +1,5 @@
 const mongoose = require('../../database/db')
-const mongoosastic = require('mongoosastic')
+// const mongoosastic = require('mongoosastic')
 
 const LikeSchema = new mongoose.Schema(
 	{

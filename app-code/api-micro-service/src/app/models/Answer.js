@@ -29,7 +29,12 @@ const AnswerSchema = new mongoose.Schema(
 				type: mongoose.SchemaTypes.ObjectId,
 				ref: 'Dislike'
 			}
-		]
+		],
+		previous_version:{
+			type: mongoose.SchemaTypes.ObjectId,
+			ref: 'Answer',
+			default: null
+		}
 	},
 	{ timestamps: true }
 )

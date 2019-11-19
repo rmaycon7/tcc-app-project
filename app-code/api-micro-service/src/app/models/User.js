@@ -1,11 +1,15 @@
 const mongoosastic = require('mongoosastic')
 const mongoose = require('../../database/db')
+const mexp = require('mongoose-elasticsearch-xp')
+const mongooseBcrypt = require('mongoose-bcrypt')
+const version = require('mongoose-version')
 const UserSchema = new mongoose.Schema(
 	{
 		name: {
 			type: String,
 			required: true,
 			es_indexed: true
+			// default: ''
 		},
 		email: {
 			type: String,
@@ -19,7 +23,8 @@ const UserSchema = new mongoose.Schema(
 		},
 		password: {
 			require: true,
-			type: String
+			type: String,
+			bcrypt: true
 		},
 		// lista com os temas de interese do usuario
 		interest_themes: {
@@ -34,7 +39,7 @@ const UserSchema = new mongoose.Schema(
 			}
 		],
 		// indica quais as questoes o usuário respondeu
-		answered_questions: [
+		questions_answerers: [
 			{
 				type: mongoose.SchemaTypes.ObjectId,
 				ref: 'Answer'
@@ -44,7 +49,10 @@ const UserSchema = new mongoose.Schema(
 	{ timestamps: true }
 )
 
-UserSchema.plugin(mongoosastic)
+// UserSchema.plugin(version)
+// UserSchema.plugin(mongoosastic)
+UserSchema.plugin(mexp)
+UserSchema.plugin(mongooseBcrypt)
 const User = mongoose.model('User', UserSchema)
 
 module.exports = User
