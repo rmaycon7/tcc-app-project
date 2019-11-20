@@ -1,6 +1,13 @@
 const mongoose = require('../../database/db')
 const mongoosastic = require('mongoosastic')
 
+const VersionQuestionSchema = new mongoose.Schema({
+	title: String,
+	key_words: [{ type: String }]
+}, {timestamps: true})
+
+const version_question = mongoose.model('QuestionVersion', VersionQuestionSchema)
+
 const QuestionSchema = new mongoose.Schema(
 	{
 		title: {
@@ -32,7 +39,13 @@ const QuestionSchema = new mongoose.Schema(
 			type: mongoose.SchemaTypes.ObjectId,
 			ref: 'Question',
 			default: null
-		}
+		},
+		version: [
+			{
+				type: mongoose.SchemaTypes.ObjectId,
+				ref: 'QuestionVersion'
+			}
+		]
 	},
 	{ timestamps: true }
 )
@@ -40,4 +53,4 @@ const QuestionSchema = new mongoose.Schema(
 QuestionSchema.plugin(mongoosastic)
 
 const Question = mongoose.model('Question', QuestionSchema)
-module.exports = Question
+module.exports = { Question, version_question }
