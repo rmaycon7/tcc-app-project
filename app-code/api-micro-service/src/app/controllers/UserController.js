@@ -31,7 +31,7 @@ const get = async (id) =>{
 }
 
 const create = async (payload) => {
-	console.log(payload);
+	console.log(payload)
 	// User.
 	const user = new User(payload)
 

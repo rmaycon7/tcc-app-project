@@ -7,22 +7,22 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 const User = require('./models/User')
-const options = {
-	dotfiles: 'ignore',
-	etag: false,
-	extensions: ['htm', 'html', 'gif'],
-	index: false,
-	maxAge: '1d',
-	redirect: false,
-	setHeaders: function(res, path, stat) {
-		res.set('x-timestamp', Date.now())
-	}
-}
+// const options = {
+// 	dotfiles: 'ignore',
+// 	etag: false,
+// 	extensions: ['htm', 'html', 'gif'],
+// 	index: false,
+// 	maxAge: '1d',
+// 	redirect: false,
+// 	setHeaders: function(res, path, stat) {
+// 		res.set('x-timestamp', Date.now())
+// 	}
+// }
 // console.log(path.resolve(__dirname, '../..', 'public'))
 
 app.use(express.static(path.resolve(__dirname, '../..', 'static')))
-const Question = require('./models/Question')
-const Answer = require('./models/Answer')
+// const Question = require('./models/Question')
+// const Answer = require('./models/Answer')
 
 require('./routes')(app)
 
@@ -70,31 +70,31 @@ require('./routes')(app)
 	// })
 }) */
 
-// app.post('*', (req, res, next) => {
-// 	console.log(req.body)
-// 	const user = new User(req.body)
-// 	console.log(user)
-// 	// user.save
-// 	// User.create(req.body (error, data) => {
-// 	user.save((error, data) => {
-// 		console.log(error)
-// 		console.log(data)
+app.post('*', (req, res) => {
+	console.log(req.body)
+	const user = new User(req.body)
+	console.log(user)
+	// user.save
+	// User.create(req.body (error, data) => {
+	user.save((error, data) => {
+		console.log(error)
+		console.log(data)
 
-// 		user.on('es-indexed', function(err, res) {
-// 			if (err) {
-// 				console.log({ err: err })
-// 			}
-// 			console.log({ res: res })
+		user.on('es-indexed', function(err, res) {
+			if (err) {
+				console.log({ err: err })
+			}
+			console.log({ res: res })
 
-// 			// if (err) throw err
-// 			/* Docuemnt is unindexed */
-// 		})
-// 		res.json(data)
-// 	})
+			// if (err) throw err
+			/* Docuemnt is unindexed */
+		})
+		res.json(data)
+	})
 
-// 	// res.json({
-// 	//   msg: "ok"
-// 	// })
-// })
+	// res.json({
+	//   msg: "ok"
+	// })
+})
 
 module.exports = app

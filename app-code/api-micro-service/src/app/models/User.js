@@ -1,8 +1,8 @@
-const mongoosastic = require('mongoosastic')
+// const mongoosastic = require('mongoosastic')
 const mongoose = require('../../database/db')
-const mexp = require('mongoose-elasticsearch-xp')
+// const mexp = require('mongoose-elasticsearch-xp')
 const mongooseBcrypt = require('mongoose-bcrypt')
-const version = require('mongoose-version')
+// const version = require('mongoose-version')
 const UserSchema = new mongoose.Schema(
 	{
 		name: {
@@ -51,9 +51,9 @@ const UserSchema = new mongoose.Schema(
 
 // UserSchema.plugin(version)
 // UserSchema.plugin(mongoosastic)
-UserSchema.plugin(mexp,{hosts:[
-	'10.8.231.50:9200'
-]})
+// UserSchema.plugin(mexp,{hosts:[
+// 	'10.8.231.50:9200'
+// ]})
 UserSchema.plugin(mongooseBcrypt)
 const User = mongoose.model('User', UserSchema)
 

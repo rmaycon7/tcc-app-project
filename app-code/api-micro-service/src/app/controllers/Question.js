@@ -24,7 +24,7 @@ const get = async (id) => {
 			name: 'Buscar pergunta',
 			statusCode: 404
 		}
-	}).catch(errro => error)
+	}).catch(error => error)
 }
 /* 
 método para criar uma perguta
@@ -36,12 +36,12 @@ const create  = async (payload) => {
 /* 
 método para atualizar uma pergunta 
 */
-const version_question = require('../models/Question').version_question
+// const version_question = require('../models/Question').version_question
 const update = async (id, payload) => {
 
-	if (payload) {
+	// if (payload) {
 		
-	}
+	// }
 
 
 
@@ -87,4 +87,8 @@ const remove = async (id) => {
 			statusCode: 404
 		}
 	}).catch(error => error)
+}
+
+module.exports = {
+	create, remove, update, list, get
 }
