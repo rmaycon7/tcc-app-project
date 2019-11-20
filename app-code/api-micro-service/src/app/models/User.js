@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema(
 		// caminho da foto de perfil do usuario
 		profile_picture_path: {
 			type: String,
-			default: 'public/default_use.jpg'
+			default: 'public/default_user.png'
 		},
 		password: {
 			require: true,
@@ -51,7 +51,9 @@ const UserSchema = new mongoose.Schema(
 
 // UserSchema.plugin(version)
 // UserSchema.plugin(mongoosastic)
-UserSchema.plugin(mexp)
+UserSchema.plugin(mexp,{hosts:[
+	'10.8.231.50:9200'
+]})
 UserSchema.plugin(mongooseBcrypt)
 const User = mongoose.model('User', UserSchema)
 

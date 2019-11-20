@@ -1,7 +1,11 @@
 const User = require('../models/User')
 const responses = require('../../config/errors_response')
 const list = async () =>{
-	User.find().then(data => {
+	return User.find().then(data => {
+		let aux = data
+		data = {
+		}
+		data.data = aux
 		data.statusCode = 200
 		return data
 	}).catch(error => {
@@ -11,7 +15,7 @@ const list = async () =>{
 }
 
 const get = async (id) =>{
-	User.findOneById(id).then(data =>{
+	return User.findById(id).then(data =>{
 		/*
 		verifando se o retorno da função possui conteúdo, caso não possua nenhum dado indica que nenhum registro foi encontrado com o id fornecido
 		*/
@@ -27,7 +31,20 @@ const get = async (id) =>{
 }
 
 const create = async (payload) => {
-	User.insertOne(pyload).then(data =>{
+	console.log(payload);
+	// User.
+	const user = new User(payload)
+
+	return user.save().then(data =>{
+		user.on('es-indexed', function(err, res) {
+			if (err) {
+				console.log({ err: err })
+			}
+			console.log({ res: res })
+
+			// if (err) throw err
+			/* Docuemnt is unindexed */
+		})
 		data.statusCode = 200
 		return data
 	}).catch(error => {
@@ -37,7 +54,7 @@ const create = async (payload) => {
 }
 
 const update = async (id,payload) =>{
-	User.findOneAndUpdate(id, payload, {new:true}).then(data =>{
+	return User.findOneAndUpdate(id, payload, {new:true}).then(data =>{
 		if (data) {
 			data.statusCode = 200
 			return data
@@ -50,7 +67,7 @@ const update = async (id,payload) =>{
 }
 
 const remove = async (id) =>{
-	User.findOneAndRemove(id).then(data => {
+	return User.findOneAndRemove(id).then(data => {
 		/*
 		verifando se o retorno da função possui conteúdo, caso não possua nenhum dado indica que nenhum registro foi encontrado com o id fornecido
 		*/

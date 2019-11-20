@@ -23,6 +23,12 @@ const options = {
 app.use(express.static(path.resolve(__dirname, '../..', 'static')))
 const Question = require('./models/Question')
 const Answer = require('./models/Answer')
+
+require('./routes')(app)
+
+
+
+
 // User.on()
 // User.createMapping(function(err, mapping) {
 // 	if (err) {
@@ -33,15 +39,15 @@ const Answer = require('./models/Answer')
 // 		console.log(mapping)
 // 	}
 // })
-app.get('*', async (req, res, next) => {
-	User.esSearch({
-		query_string: {
-			query: req.query.query
-		}
-	}).then(function(results) {
-		// results here
-		res.json(results)
-	})
+/* app.get('*', async (req, res, next) => {
+	// User.esSearch({
+	// 	query_string: {
+	// 		query: req.query.query
+	// 	}
+	// }).then(function(results) {
+	// 	// results here
+	// 	res.json(results)
+	// })
 	// User.search(
 	// 	{
 	// 		query_string: {
@@ -62,33 +68,33 @@ app.get('*', async (req, res, next) => {
 	// res.json({
 	//   msg: "ok"
 	// })
-})
+}) */
 
-app.post('*', (req, res, next) => {
-	console.log(req.body)
-	const user = new User(req.body)
-	console.log(user)
-	// user.save
-	// User.create(req.body (error, data) => {
-	user.save((error, data) => {
-		console.log(error)
-		console.log(data)
+// app.post('*', (req, res, next) => {
+// 	console.log(req.body)
+// 	const user = new User(req.body)
+// 	console.log(user)
+// 	// user.save
+// 	// User.create(req.body (error, data) => {
+// 	user.save((error, data) => {
+// 		console.log(error)
+// 		console.log(data)
 
-		user.on('es-indexed', function(err, res) {
-			if (err) {
-				console.log({ err: err })
-			}
-			console.log({ res: res })
+// 		user.on('es-indexed', function(err, res) {
+// 			if (err) {
+// 				console.log({ err: err })
+// 			}
+// 			console.log({ res: res })
 
-			// if (err) throw err
-			/* Docuemnt is unindexed */
-		})
-		res.json(data)
-	})
+// 			// if (err) throw err
+// 			/* Docuemnt is unindexed */
+// 		})
+// 		res.json(data)
+// 	})
 
-	// res.json({
-	//   msg: "ok"
-	// })
-})
+// 	// res.json({
+// 	//   msg: "ok"
+// 	// })
+// })
 
 module.exports = app

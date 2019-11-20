@@ -1,5 +1,7 @@
 const mongoose = require('../../database/db')
 const mongoosastic = require('mongoosastic')
+const mexp = require('mongoose-elasticsearch-xp')
+
 
 const VersionQuestionSchema = new mongoose.Schema({
 	title: String,
@@ -50,7 +52,9 @@ const QuestionSchema = new mongoose.Schema(
 	{ timestamps: true }
 )
 
-QuestionSchema.plugin(mongoosastic)
+// QuestionSchema.plugin(mongoosastic)
 
+QuestionSchema.plugin(mexp, { hosts: ['10.8.231.50:9200'] })
 const Question = mongoose.model('Question', QuestionSchema)
+
 module.exports = { Question, version_question }

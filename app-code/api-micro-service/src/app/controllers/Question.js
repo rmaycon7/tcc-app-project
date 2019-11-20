@@ -1,4 +1,4 @@
-const Question = require('../models/Question')
+const Question = require('../models/Question').Question
 /* 
 método para listar todas as perguntas salvas na base de dados
 */
@@ -30,12 +30,21 @@ const get = async (id) => {
 método para criar uma perguta
 */
 const create  = async (payload) => {
+	
 	Question.insertOne(payload).then(data => data).catch(error => error)
 }
 /* 
 método para atualizar uma pergunta 
 */
+const version_question = require('../models/Question').version_question
 const update = async (id, payload) => {
+
+	if (payload) {
+		
+	}
+
+
+
 	Question.findOneAndUpdate(id, payload, {new: true}).then(data => {
 		/*
 		verifando se o retorno da função possui conteúdo, caso não possua nenhum dado indica que nenhum registro foi encontrado com o id fornecido
