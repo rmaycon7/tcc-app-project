@@ -1,7 +1,7 @@
 const mongoose = require('../../database/db')
 // const mongoosastic = require('mongoosastic')
 
-const LikeSchema = new mongoose.Schema(
+const InteractionSchema = new mongoose.Schema(
 	{
 		belongs_to: {
 			type: mongoose.SchemaTypes.ObjectId,
@@ -10,10 +10,16 @@ const LikeSchema = new mongoose.Schema(
 		user_id: {
 			type: mongoose.SchemaTypes.ObjectId,
 			ref: 'User'
+		},
+		vote:{
+			type: Number,
+			min: -50,
+			max: 50
 		}
+
 	},
 	{ timestamps: true }
 )
-// LikeSchema.plugin(mongoosastic)
-const Like = mongoose.model('Like', LikeSchema)
-module.exports = Like
+// InteractionSchema.plugin(mongoosastic)
+const Interaction = mongoose.model('Interaction', InteractionSchema)
+module.exports = Interaction

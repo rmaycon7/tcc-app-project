@@ -4,7 +4,13 @@ const mongoose = require('../../database/db')
 const mongooseBcrypt = require('mongoose-bcrypt')
 // const version = require('mongoose-version')
 const UserSchema = new mongoose.Schema(
-	{
+	{	
+		root_key: {
+			type: String,
+			required: false,
+			default: null,
+			select: false
+		},
 		name: {
 			type: String,
 			required: true,
@@ -14,7 +20,7 @@ const UserSchema = new mongoose.Schema(
 		email: {
 			type: String,
 			required: true,
-			unique: false
+			unique: true
 		},
 		// caminho da foto de perfil do usuario
 		profile_picture_path: {
@@ -24,7 +30,8 @@ const UserSchema = new mongoose.Schema(
 		password: {
 			require: true,
 			type: String,
-			bcrypt: true
+			bcrypt: true,
+			select: false
 		},
 		// lista com os temas de interese do usuario
 		interest_themes: {

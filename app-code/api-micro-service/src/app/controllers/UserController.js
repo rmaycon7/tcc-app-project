@@ -54,7 +54,7 @@ const create = async (payload) => {
 }
 
 const update = async (id,payload) =>{
-	return User.findOneAndUpdate(id, payload, {new:true}).then(data =>{
+	return User.findById(id, payload, {new:true}).then(data =>{
 		if (data) {
 			data.statusCode = 200
 			return data
@@ -67,7 +67,7 @@ const update = async (id,payload) =>{
 }
 
 const remove = async (id) =>{
-	return User.findOneAndRemove(id).then(data => {
+	return User.findOneAndRemove({id}).then(data => {
 		/*
 		verifando se o retorno da função possui conteúdo, caso não possua nenhum dado indica que nenhum registro foi encontrado com o id fornecido
 		*/

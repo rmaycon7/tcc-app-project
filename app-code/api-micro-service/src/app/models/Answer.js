@@ -10,34 +10,41 @@ const AnswerSchema = new mongoose.Schema(
 		belongs_to: {
 			type: mongoose.SchemaTypes.ObjectId,
 			ref: 'Question',
-			required: true
+			required: true,
+			autopopulate: true
 		},
 		// indica a qual usuario a resposta pertence
 		owner: {
 			type: mongoose.SchemaTypes.ObjectId,
 			ref: 'User',
-			required: true
+			required: true,
+			autopopulate: true
+			
 		},
 		likes: [
 			{
 				type: mongoose.SchemaTypes.ObjectId,
-				ref: 'Like'
+				ref: 'Like',
+				autopopulate: true
 			}
 		],
 		dislikes: [
 			{
 				type: mongoose.SchemaTypes.ObjectId,
-				ref: 'Dislike'
+				ref: 'Dislike',
+				autopopulate: true
 			}
 		],
 		previous_version:{
 			type: mongoose.SchemaTypes.ObjectId,
 			ref: 'Answer',
-			default: null
+			default: null,
+			autopopulate: true
 		}
 	},
 	{ timestamps: true }
 )
 
+AnswerSchema.plugin(require('mongoose-autopopulate'))
 const Answer = mongoose.model('Answer', AnswerSchema)
 module.exports = Answer

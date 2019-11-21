@@ -6,7 +6,14 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // app.use(express.json())
 app.use(bodyParser.json())
 
-const User = require('./models/User')
+// const User = require('./models/User')
+/* 
+cadastra um usuário root no sistem caso ainda não exista um cadastrado
+*/
+require('../utils/utils').set_root_user()
+
+app.use(require('morgan')('dev'))
+
 // const options = {
 // 	dotfiles: 'ignore',
 // 	etag: false,
@@ -70,31 +77,31 @@ require('./routes')(app)
 	// })
 }) */
 
-app.post('*', (req, res) => {
-	console.log(req.body)
-	const user = new User(req.body)
-	console.log(user)
-	// user.save
-	// User.create(req.body (error, data) => {
-	user.save((error, data) => {
-		console.log(error)
-		console.log(data)
+// app.post('*', (req, res) => {
+// 	console.log(req.body)
+// 	const user = new User(req.body)
+// 	console.log(user)
+// 	// user.save
+// 	// User.create(req.body (error, data) => {
+// 	user.save((error, data) => {
+// 		console.log(error)
+// 		console.log(data)
 
-		user.on('es-indexed', function(err, res) {
-			if (err) {
-				console.log({ err: err })
-			}
-			console.log({ res: res })
+// 		user.on('es-indexed', function(err, res) {
+// 			if (err) {
+// 				console.log({ err: err })
+// 			}
+// 			console.log({ res: res })
 
-			// if (err) throw err
-			/* Docuemnt is unindexed */
-		})
-		res.json(data)
-	})
+// 			// if (err) throw err
+// 			/* Docuemnt is unindexed */
+// 		})
+// 		res.json(data)
+// 	})
 
-	// res.json({
-	//   msg: "ok"
-	// })
-})
+// 	// res.json({
+// 	//   msg: "ok"
+// 	// })
+// })
 
 module.exports = app
