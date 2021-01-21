@@ -41,6 +41,6 @@
   "devDependencies": {
     "eslint-config-prettier": "^6.7.0",
     "prettier-eslint": "^9.0.1",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   }
 }
